@@ -1,23 +1,15 @@
 {%extends 'all-pics/base.html'%}
-
+{% load static%}
 {% block content %}
-{{block.super}}
-<h1>Welcome to Fabulous Gallery</h1>
-<div class="welcome">
-    <div class="holder">
-        <h2 id="category">Compel the audience. Capture the moment. Light with purpose</h2>
-        <form role="form" class="pt-3" action="/search">
-            <div class="form-group">
-                <input type="text" class="form-control mt-5 " placeholder="&#xF002; Search image in category"
-                    style="font-family:Arial, FontAwesome" name="category" required>
-                <small>Top Searches: Music, Food, Animals</small><br>
-                <button type="submit" class="btn btn-warning mt-1">SEARCH</button>
-            </div>
-        </form>
-        <!-- <a href="#gallery" class="btn btn-warning explore">EXPLORE GALLERY</a> -->
+{{ block.super}}
+<div class="welcom">
+    <div class="holde">
+        <h2>Images from {{message}}</h2>
     </div>
 </div>
 <div class="container mt-5">
+
+    {% if images%}
 
     <div class="row gallery p-3" id="gallery">
         {%for photo in images%}
@@ -25,7 +17,6 @@
             <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
             <small id="photoDesc">{{photo.name}}</small>
         </div>
-       
         <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -40,21 +31,32 @@
                             <img src="{{photo.image.url}}" alt="{{photo.name}}" class="img-fluid">
                             <p class="text-center mt-1">{{photo.description}}</p>
                             
-                            
                         </div>
                         <div class="modal-footer">
                             <input class="form-control" type="text" value="{{photo.image.url}}" id="{{photo.id}}.url" readonly>
                             <button class="btn btn-outline-success btn-sm link" id="lol" onclick="download('{{photo.id}}.url')"><i class="fa fa-download" aria-hidden="true" id="cl"></i></button>
                             <button class="btn btn-outline-success btn-sm" onclick="copypath('{{photo.id}}.url')">Copy</button>
-                            <!-- <a src="{{photo.image.url}}" id="lol" download><i class="fa fa-download" aria-hidden="true" id="cl" value="{{photo.id}}"></i></a> -->
                             <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            {%endfor%}
+        {%endfor%}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{%static 'photos/found.jpeg'%}" alt="">
+        </div>
+        <div class="col-md-6 pt-4">
+            <h3>No images in this category yet, check for updates later.</h3>
         </div>
     </div>
-{% endblock %}
+       
+        
+    
+    {% endif %}
+</div>
 
+{%endblock%}
