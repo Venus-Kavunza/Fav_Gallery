@@ -6,7 +6,7 @@ from .models import Pic, Location, Category
 # Create your views here.
 def welcome(request):
     image=Pic.objects.all()
-    locations = Location.all_Locations()
+    locations = Location.all_locations()
     return render(request, 'home.html', {'images': Pic, 'locations': Location})
 
 def get_category(request):
@@ -37,4 +37,4 @@ def get_image(request,image_id):
     except:
         raise Http404()
         # return redirect(request,"error.html")
-    return render(request,"all-gallery/singleimage.html",{'photo':image}
+    return render(request,"all-gallery/singleimage.html",{'photo':image})
