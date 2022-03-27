@@ -1,3 +1,4 @@
+from django.http.response import Http404
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse
 from .models import Pic, Location, Category
@@ -22,3 +23,18 @@ def get_category(request):
     else:
         message = "Please enter any category"
         return render(request, 'search.html',{"message":message})
+
+def get_location(request,search_location):
+    title = "Location"
+    locations = Location.objects.all()
+    images = Pic.filter_by_location(search_location)
+    message = f"{search_location}"
+    return render(request, 'all-gallery/location.html',{"images":images,'locations':locations,'title':title,'message':message})
+
+def get_image(request,image_id):
+    try:
+        image =Pic.objects.get(id=image_id)
+    except:
+        raise Http404()
+        # return redirect(request,"error.html")
+    return render(request,"all-gallery/singleimage.html",{'photo':image}
