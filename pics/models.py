@@ -8,3 +8,10 @@ class Pic(models.Model):
     name = models.CharField(max_length=200)
     upload_date = models.DateTimeField(auto_now_add=True)
      
+    
+
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
