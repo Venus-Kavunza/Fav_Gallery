@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,7 +61,6 @@ ROOT_URLCONF = 'gallery.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,7 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    BASE_DIR, "static",
 ]
 
 # Default primary key field type
@@ -134,15 +136,13 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT =BASE_DIR/'staticfiles'
 
-MEDIA_URL = '/images/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'dzhxp777b',
-#     'API_KEY': '939366662997374',
-#     'API_SECRET': 'NyVFQzHFPKnSIEYqKPbmu9FSwms',
-# }
-# #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+cloudinary.config( 
+  cloud_name = "venusfabio", 
+  api_key = "928118823669567", 
+  api_secret = "9tvW95lcj70W6r-eUeXPXP9R2ZI" 
+)

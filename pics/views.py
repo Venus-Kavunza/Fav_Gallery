@@ -5,9 +5,9 @@ from .models import Pic, Location, Category
 
 # Create your views here.
 def welcome(request):
-    image=Pic.objects.all()
+    images=Pic.objects.all()
     locations = Location.all_locations()
-    return render(request, 'home.html', {'images': image, 'locations': locations})
+    return render(request, 'home.html', {'images': images, 'locations': locations})
 
 def get_category(request):
     title = "Category"
@@ -19,7 +19,7 @@ def get_category(request):
         message = f"{search_category}"
 
 
-        return render(request,'all-gallery/search.html',{'message':message,'images':searched_category,'title':title,'locations':locations})
+        return render(request,'search.html',{'message':message,'images':searched_category,'title':title,'locations':locations})
     else:
         message = "Please enter any category"
         return render(request, 'search.html',{"message":message})
@@ -29,7 +29,7 @@ def get_location(request,search_location):
     locations = Location.objects.all()
     images = Pic.filter_by_location(search_location)
     message = f"{search_location}"
-    return render(request, 'all-pics/location.html',{"images":images,'locations':locations,'title':title,'message':message})
+    return render(request, 'location.html',{"images":images,'locations':locations,'title':title,'message':message})
 
 def get_image(request,image_id):
     try:
@@ -37,4 +37,4 @@ def get_image(request,image_id):
     except:
         raise Http404()
         # return redirect(request,"error.html")
-    return render(request,"all-pics/pic.html",{'photo':image})
+    return render(request,"pic.html",{'photo':image})
