@@ -1,22 +1,9 @@
-{%extends 'all-pics/base.html'%}
+{%extends 'base.html'%}
 
 {% block content %}
 {{block.super}}
 <h1>Welcome to Fabulous Gallery</h1>
-<div class="welcome">
-    <div class="holder">
-        <h2 id="category">Compel the audience. Capture the moment. Light with purpose</h2>
-        <form role="form" class="pt-3" action="/search">
-            <div class="form-group">
-                <input type="text" class="form-control mt-5 " placeholder="&#xF002; Search image in category"
-                    style="font-family:Arial, FontAwesome" name="category" required>
-                <small>Top Searches: Music, Food, Animals</small><br>
-                <button type="submit" class="btn btn-warning mt-1">SEARCH</button>
-            </div>
-        </form>
-        
-    </div>
-</div>
+
 <div class="container mt-5">
 
     <div class="row gallery p-3" id="gallery">
