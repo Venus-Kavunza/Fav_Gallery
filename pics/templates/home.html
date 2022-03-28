@@ -2,14 +2,13 @@
 
 {% block content %}
 {{block.super}}
-<h1>Welcome to Fabulous Gallery</h1>
 
 <div class="container mt-5">
 
     <div class="row gallery p-3" id="gallery">
         {%for photo in images%}
-        <div class="col-sm-8 col-lg-3 mb-3 imgdisplay"  data-toggle="modal" data-target="#{{photo.id}}">
-            <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
+        <div class="col-sm-8 col-lg-3 mb-3 imgdisplay"  data-toggle="modal" data-target="#{{photo.id}}" >
+            <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="300" width="300" style="padding: 1rem;">
             <small id="photoDesc">{{photo.name}}</small>
         </div>
        
@@ -24,7 +23,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <img src="{{photo.image.url}}" alt="{{photo.name}}" class="img-fluid">
+                            <img src="{{photo.image.url}}" alt="{{photo.name}}" class="img-fluid" height="500" width="500">
                             <p class="text-center mt-1">{{photo.description}}</p>
                             
                             

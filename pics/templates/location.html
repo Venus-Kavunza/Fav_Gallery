@@ -14,7 +14,7 @@
     <div class="row gallery p-3" id="gallery">
         {%for photo in images%}
         <div class="col-sm-8 col-lg-3 mb-3 imgdisplay"  data-toggle="modal" data-target="#{{photo.id}}">
-            <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
+            <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200" width="300">
             <small id="photoDesc">{{photo.name}}</small>
         </div>
         
