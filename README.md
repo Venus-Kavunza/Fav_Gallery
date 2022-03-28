@@ -39,13 +39,6 @@ As a user I would like to:
         $ curl https://bootstrap.pypa.io/get-pip.py | python
 
 
-
-
-* To run the application, in your terminal:
-
-        $ chmod +x start.sh
-        $ ./start.sh
-
 ## Testing the Application
 * To run the tests for the class files:
 
