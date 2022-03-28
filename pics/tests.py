@@ -28,11 +28,7 @@ class LocationTestClass(TestCase):
         print(Locations)
         self.assertTrue(len(Locations)==1)
 
-    def test_update_location(self):
-        new_location.update_location(self.location.id,new_location_name)
-        updated_location = Location.objects.filter(location_name='')
-        self.assertTrue(len(updated_location) > 0)
-
+    
 
     def test_delete_method(self):
         self.Kasarani.delete_location_name()
