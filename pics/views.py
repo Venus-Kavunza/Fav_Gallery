@@ -7,7 +7,7 @@ from .models import Pic, Location, Category
 def welcome(request):
     image=Pic.objects.all()
     locations = Location.all_locations()
-    return render(request, 'home.html', {'images': Pic, 'locations': Location})
+    return render(request, 'home.html', {'images': image, 'locations': locations})
 
 def get_category(request):
     title = "Category"
@@ -29,7 +29,7 @@ def get_location(request,search_location):
     locations = Location.objects.all()
     images = Pic.filter_by_location(search_location)
     message = f"{search_location}"
-    return render(request, 'all-gallery/location.html',{"images":images,'locations':locations,'title':title,'message':message})
+    return render(request, 'all-pics/location.html',{"images":images,'locations':locations,'title':title,'message':message})
 
 def get_image(request,image_id):
     try:
@@ -37,4 +37,4 @@ def get_image(request,image_id):
     except:
         raise Http404()
         # return redirect(request,"error.html")
-    return render(request,"all-gallery/singleimage.html",{'photo':image})
+    return render(request,"all-pics/pic.html",{'photo':image})

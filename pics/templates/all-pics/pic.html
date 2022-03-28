@@ -4,17 +4,12 @@
 {{ block.super}}
 <div class="welcom">
     <div class="holde">
-        <h2>Images from {{message}}</h2>
+        <h2>Image found</h2>
     </div>
 </div>
-<div class="container mt-5">
-
-    {% if images%}
-
-    <div class="row gallery p-3" id="gallery">
-        {%for photo in images%}
+    <div class="container mt-5">
         <div class="col-sm-8 col-lg-3 mb-3 imgdisplay"  data-toggle="modal" data-target="#{{photo.id}}">
-            <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
+            <img src="{{images.image.url}}" alt=" " class="card-img photo" height="200">
             <small id="photoDesc">{{photo.name}}</small>
         </div>
         
@@ -29,35 +24,21 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <img src="{{photo.image.url}}" alt="{{photo.name}}" class="img-fluid">
+                            <img src="{{images.image.url}}" alt="{{photo.name}}" class="img-fluid">
                             <p class="text-center mt-1">{{photo.description}}</p>
                             
                         </div>
                         <div class="modal-footer">
-                            <input class="form-control" type="text" value="{{photo.image.url}}" id="{{photo.id}}.url" readonly>
+                            <input class="form-control" type="text" value="{{get_image.image.url}}" id="{{photo.id}}.url" readonly>
                             <button class="btn btn-outline-success btn-sm link" id="lol" onclick="download('{{photo.id}}.url')"><i class="fa fa-download" aria-hidden="true" id="cl"></i></button>
                             <button class="btn btn-outline-success btn-sm" onclick="copypath('{{photo.id}}.url')">Copy</button>
+                            
                             <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        {%endfor%}
-    </div>
-    {% else %}
-    <div class="row">
-        <div class="col-md-4">
-            <img src="{%static 'photos/found.jpeg'%}" alt="">
-        </div>
-        <div class="col-md-6 pt-4">
-            <h3>No images in this category yet, check for updates later.</h3>
-        </div>
-    </div>
-       
         
-    
-    {% endif %}
-</div>
-
+    </div>
 {%endblock%}

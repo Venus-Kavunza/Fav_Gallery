@@ -1,10 +1,10 @@
-{%extends 'all-gallery/base.html'%}
+{%extends 'base.html'%}
 {% load static%}
 {% block content %}
 {{ block.super}}
 <div class="welcom">
     <div class="holde">
-        <h2>Images from {{message}}</h2>
+        <h2>Found {{ images|length }} of searched category {{message}}</h2>
     </div>
 </div>
 <div class="container mt-5">
@@ -17,7 +17,7 @@
             <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
             <small id="photoDesc">{{photo.name}}</small>
         </div>
-        
+      
         <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -37,6 +37,7 @@
                             <input class="form-control" type="text" value="{{photo.image.url}}" id="{{photo.id}}.url" readonly>
                             <button class="btn btn-outline-success btn-sm link" id="lol" onclick="download('{{photo.id}}.url')"><i class="fa fa-download" aria-hidden="true" id="cl"></i></button>
                             <button class="btn btn-outline-success btn-sm" onclick="copypath('{{photo.id}}.url')">Copy</button>
+                            
                             <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
                             </button>
                         </div>
@@ -47,11 +48,11 @@
     </div>
     {% else %}
     <div class="row">
-        <div class="col-md-4">
-            <img src="{%static 'photos/found.jpeg'%}" alt="">
-        </div>
         <div class="col-md-6 pt-4">
-            <h3>No images in this category yet, check for updates later.</h3>
+            <h3 class="text-dark bg-warning">No images in this category yet, check for updates later.</h3>
+        </div>
+        <div class="col-md-4">
+            <img src="{%static 'photos/found.jpeg'%}" alt="" class="error">
         </div>
     </div>
        
