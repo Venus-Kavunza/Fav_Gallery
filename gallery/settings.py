@@ -37,7 +37,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'djando_heroku',
+    'django_heroku',
     'cloudinary',
     'pics',
     'bootstrap3',
