@@ -7,7 +7,7 @@ This is a website where I display my photos for others to see.A user can click o
 
 You can view the site at:[Heroku](https://fabio-gallery.herokuapp.com/)
 
-![Landing page photo](https://https://github.com/Venus-Kavunza/Fav_Gallery/blob/master/static/photos/landing-page.png)
+![Landing page photo](https://github.com/Venus-Kavunza/Fav_Gallery/blob/master/static/photos/landing-page.png)
 
 
 ## User Stories
