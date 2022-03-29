@@ -1,92 +1,105 @@
 from django.test import TestCase
-
-# Create your tests here.
-from django.test import TestCase
-from .models import Pics, Location, Category
-
-# Testing the save method
-
-
-class LocationTestClass(TestCase):
-
-    # set up method
+from .models import Pic,Location,Category
+class CategoryTestClass(TestCase):
 
     def setUp(self):
-        self.Venus = Location(location_name='Venus')
-        self.Venus.save_location_name()
+        self.category = Category(name="travel")
+        self.category.save_category()
 
-
-    def tearDown(self):
-        Location.objects.all().delete()
- 
     def test_instance(self):
-        self.assertTrue(isinstance(self.Venus, Location))
+        self.assertTrue(isinstance(self.category, Category))
 
     def test_save_method(self):
-        self.Venus.save_location_name()
-        Locations = Location.objects.all()
-        print(Locations)
-        self.assertTrue(len(Locations)==1)
-
-    
+        self.category.save_category()
+        category = Category.objects.all()
+        self.assertTrue(len(category) > 0)
 
     def test_delete_method(self):
-        self.Kasarani.delete_location_name()
-        Locations = Location.objects.all()
-        print(Locations)
-        self.assertTrue(len(Locations)==0)
-        
+        self.category.save_category()
+        self.category.delete_category()
+        search_category = Category.objects.all()
+        self.assertTrue(len(search_category) == 0)
 
+    def test_update_category(self):
+        changed_location = 'Food'
+        self.category.update_category(self.category.id, changed_location)
+        changed_location = Category.objects.filter(name='Food')
+        self.assertTrue(len(changed_location) == 1)
     
-
-class PhotosTestClass(TestCase):
+    
+class LocationTestCLass(TestCase):
+  
     def setUp(self):
-        self. new_location = Location(location_name = 'Nakuru')
-        self. new_location.save()
-
-        self. new_category = Category(category_name = 'Nature')
-        self. new_category.save()
-
-        self. new_car = Pics(name = 'Benz', photo_description = 'Nice photo', photo_location = self.new_location, photo_category = self.new_category, photo = 'image.jpeg' )
-        self. new_car.save()
-
-    def tearDown(self):
-        Pics.objects.all().delete()
-        Location.objects.all().delete()
-        Category.objects.all().delete()
-
+        self.location = Location(name="America")
+        self.location.save_location()
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.new_building, Pics))
+        self.assertTrue(isinstance(self.location,Location))
 
-    def test_save_car(self):
-        self.new_building.save_photo()
-        photo = Pics.objects.all()
-      
+    def test_save_location(self):
+        self.location.save_location()
+        locations = Location.objects.all()
+        self.assertTrue(len(locations) > 0)
+
+    def test_delete_location(self):
+        self.location.delete_location()
+        location = Location.objects.all()
+        self.assertTrue(len(location) == 0)
         
-    def test_delete_car(self):
-        self.new_building.save_photo()
-        self.new_building.delete_photo()
-       
+    def test_update_location(self):
+        changed_location = 'Asia'
+        self.location.update_location(self.location.id, changed_location)
+        changed_location = Location.objects.filter(name='Asia')
+        self.assertTrue(len(changed_location) == 1)
 
-class CategoryTestClass(TestCase):
+class ImageTestClass(TestCase):
+
     def setUp(self):
-        self.Tour= Category(category_building ='Tour')
-        self.Tour.save_building_name()
+        self.location = Location(name="Mauritious")
+        self.location.save_location()
+        
+        self.category = Category(name="travel")
+        self.category.save_category()
 
-
-    def tearDown(self):
-        Category.objects.all().delete()
+        self.image = Pic(image='mountain.png',name='image test', description='my test',category=self.category,location=self.location)
+        self.image.save_image()
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.Tour, Category))
+        self.assertTrue(isinstance(self.image, Pic))
 
-    def test_save_category(self):
-        self.test_category = Category(category_name = 'Business')
-        self.test_category.save_category_name()
+    def tearDown(self):
+        self.location.delete_location()
+        self.category.delete_category()
+        self.image.delete_image()
+        
 
-
-    def test_delete_category(self):
-        self.test_category = Category(category_name = 'Business')
-        self.test_category.save_category_name()
-        self.test_category.delete_category_name()
+    def test_save_image(self):
+        self.image.save_image()
+        images  = Pic.objects.all()
+        self.assertTrue(len(images)>0)
+        
+    def test_delete_image(self):
+        my_image = Pic.objects.filter(name='image test')
+        my_image.delete()
+        self.assertTrue(len(Pic.objects.all()) == 0)
+        
+    def test_get_image_by_id(self):
+        searched_image = self.image.get_image_by_id(self.image.id)
+        image = Pic.objects.filter(id=self.image.id)
+        self.assertTrue(searched_image, image)
+        
+        
+    def test_search_image_by_category(self):
+        searched_images = self.image.search_image('travel')
+        self.assertTrue(len(searched_images) >= 1)
+    
+    
+    def test_search_by_location(self):
+        searched_images = self.image.filter_by_location('Asia')
+        self.assertTrue(len(searched_images) == 1)
+    
+    def test_update_image(self):
+        changed_image ='bacon.png'
+        self.image.update_image(self.image.id,changed_image)
+        changed_image = Pic.objects.filter(image='bacon.png')
+        self.assertTrue(len(changed_image) ==1)
